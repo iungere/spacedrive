@@ -254,6 +254,8 @@ export type Error = { code: ErrorCode; message: string }
  */
 export type ErrorCode = "BadRequest" | "Unauthorized" | "Forbidden" | "NotFound" | "Timeout" | "Conflict" | "PreconditionFailed" | "PayloadTooLarge" | "MethodNotSupported" | "ClientClosedRequest" | "InternalServerError"
 
+export type ExifDataOrder = { field: "epochTime"; value: SortOrder }
+
 export type ExplorerItem = { type: "Path"; thumbnail: string[] | null; item: FilePathWithObject } | { type: "Object"; thumbnail: string[] | null; item: ObjectWithFilePaths } | { type: "Location"; item: Location } | { type: "NonIndexedPath"; thumbnail: string[] | null; item: NonIndexedPathItem } | { type: "SpacedropPeer"; item: PeerMetadata } | { type: "Label"; thumbnails: string[][]; item: LabelWithObjects }
 
 export type ExplorerLayout = "grid" | "list" | "media"
@@ -441,8 +443,6 @@ export type LocationWithIndexerRule = { id: number; pub_id: number[]; name: stri
 
 export type MaybeUndefined<T> = null | T
 
-export type MediaDataOrder = { field: "epochTime"; value: SortOrder }
-
 /**
  * This can be either naive with no TZ (`YYYY-MM-DD HH-MM-SS`) or UTC (`YYYY-MM-DD HH-MM-SS ±HHMM`),
  * where `±HHMM` is the timezone data. It may be negative if West of the Prime Meridian, or positive if East.
@@ -504,7 +504,7 @@ export type ObjectFilterArgs = { favorite: boolean } | { hidden: ObjectHiddenFil
 
 export type ObjectHiddenFilter = "exclude" | "include"
 
-export type ObjectOrder = { field: "dateAccessed"; value: SortOrder } | { field: "kind"; value: SortOrder } | { field: "mediaData"; value: MediaDataOrder }
+export type ObjectOrder = { field: "dateAccessed"; value: SortOrder } | { field: "kind"; value: SortOrder } | { field: "mediaData"; value: ExifDataOrder }
 
 export type ObjectSearchArgs = { take: number; orderAndPagination?: OrderAndPagination<number, ObjectOrder, ObjectCursor> | null; filters?: SearchFilterArgs[] }
 
